@@ -2,8 +2,8 @@
 FROM scratch AS ctx
 COPY build_files /
 
-# Base Image: Origami con driver NVIDIA e kernel CachyOS
-FROM registry.gitlab.com/origami-linux/images/origami-nvidia:latest
+# Base Image: DankerLinux con Niri e Driver NVIDIA
+FROM ghcr.io/dank-linux/danker-nvidia:latest
 
 # Fix per far funzionare bene i repo Fedora/COPR su immagini derivate
 RUN sed -i 's/^ID=.*/ID=fedora/' /etc/os-release
