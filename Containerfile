@@ -2,13 +2,13 @@
 FROM scratch AS ctx
 COPY build_files /
 
-# Base Image: DankerLinux con Niri e Driver NVIDIA
-FROM ghcr.io/dank-linux/danker-nvidia:latest
+# Base Image: Origami OS con driver NVIDIA e kernel CachyOS
+FROM registry.gitlab.com/origami-linux/images/origami-nvidia:latest
 
 # Fix per far funzionare bene i repo Fedora/COPR su immagini derivate
 RUN sed -i 's/^ID=.*/ID=fedora/' /etc/os-release
 
-# Copia Homebrew e abilita i servizi (utile per installare programmi extra in futuro)
+# Copia Homebrew files dall'immagine brew e abilita
 COPY --from=ghcr.io/ublue-os/brew:latest /system_files /
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
